@@ -17,38 +17,39 @@ image to the file. Program offers the menu again until the user chooses to quit.
 
 Functions
 
-main()
+main() : Wednesday, May 1... Brayton
 Data: includes all variables for image options
 Functionality: displays the options to the user, executes action based on the
 user’s pick, goes again and again until user stops playing and exits.
 
-loadPicture()
+loadPicture() : Thursday, May 2... Alex
 Input Parameters: File pointer, int image 2D array
 Returned Output: none
-Functionality: shows the image on the screen, locating it from the file it was put
-into
+Functionality: shows the image to the file
 
-editPicture(picture)
+displayPicture() : Friday, May 3... Brayton
+Input Parameters: file
+Returned Output: Image is displayed
+Functionality: displays image to screen
+
+editPicture(picture) : Saturday, May 4... Alex
 Input Parameters: int image 2D array
 Returned Output: image data modified
 Functionality: displays the editing menu for user to choose from
 
-dimPicture()
+dimPicture() : Sunday, May 5... Brayton
 Input Parameters: int image 2D array
 Returned Output: darkened image
 Functionality: darkness of each pixel is decreased one step at a time
 
-brightPicture()
+brightPicture() : Monday, May 6... Alex
 Input Parameters: int image 2D array, specific coordinates to change picture
 Returned Output: shortened image
 Functionality: darkness of each pixel is increased one step at a time
 
-sizePicture()
+sizePicture() : Tuesday, May 7... Brayton
 Input Parameters: int image 2D array
 Returned Output: darkened image
 Functionality: specific portion of the picture cropped out
 
-savePicture()
-Input Parameters: int image 2D array, filename
-Returned Output: image put in file
-Functionality: image data is added to the file connected to the program
+
