@@ -1,1 +1,54 @@
-hello world!
+Final Design Document
+Alex Cornell, Brayton Arthur 
+Image Processing Project
+
+Data
+Image Data - 2D arrays of int
+File Pointers - i/o operations
+User Menu Selections - variables, char
+
+
+Program Description
+User views menu. User provides choice on the menu. Menu is updated. Menu
+switches to whichever function was called on. Picture is returned cropped by
+specific coordinates, darker (dimmed), or brighter. User is able to save edited
+image to the file. Program offers the menu again until the user chooses to quit.
+
+
+Functions
+
+main()
+Data: includes all variables for image options
+Functionality: displays the options to the user, executes action based on the
+user’s pick, goes again and again until user stops playing and exits.
+
+loadPicture()
+Input Parameters: File pointer, int image 2D array
+Returned Output: none
+Functionality: shows the image on the screen, locating it from the file it was put
+into
+
+editPicture(picture)
+Input Parameters: int image 2D array
+Returned Output: image data modified
+Functionality: displays the editing menu for user to choose from
+
+dimPicture()
+Input Parameters: int image 2D array
+Returned Output: darkened image
+Functionality: darkness of each pixel is decreased one step at a time
+
+brightPicture()
+Input Parameters: int image 2D array, specific coordinates to change picture
+Returned Output: shortened image
+Functionality: darkness of each pixel is increased one step at a time
+
+sizePicture()
+Input Parameters: int image 2D array
+Returned Output: darkened image
+Functionality: specific portion of the picture cropped out
+
+savePicture()
+Input Parameters: int image 2D array, filename
+Returned Output: image put in file
+Functionality: image data is added to the file connected to the program
