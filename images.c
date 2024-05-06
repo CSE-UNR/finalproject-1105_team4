@@ -7,11 +7,11 @@
 
 #define MAX_SIZE 1000
 
-typedef struct {
-	int width;
-	int height;
-	int pixels[MAX_SIZE][MAX_SIZE];
-} Image; 
+
+int width;
+int height;
+int pixels[MAX_SIZE][MAX_SIZE];
+
 
 void displayMenu();
 void loadImage(Image *image);
@@ -133,6 +133,10 @@ void cropImage(Image *image) {
 }
 
 void dimImage(Image *image) {
+	for(height = 0; height < MAX_SIZE; height++){
+		if(pixels[height] = "o"){
+		}
+	}
 }
 
 void brightenImage(Image *image) {
