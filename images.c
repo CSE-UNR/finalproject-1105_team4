@@ -3,7 +3,7 @@
 //Purpose: Final Project
 
 #include <stdio.h>
-#include <stdbool.h>
+
 
 #define MAX_SIZE 1000
 
@@ -12,45 +12,39 @@ int width;
 int height;
 int pixels[MAX_SIZE][MAX_SIZE];
 
-
 void displayMenu();
-void loadImage(Image *image);
-void displayImage(const Image *image);
-void editImage(Image *image);
-void cropImage(Image *image);
-void dimImage(Image *image);
-void brightenImage(Image *image);
-void saveImage(const Image *image);
+void loadImage();
+void displayImage();
+void editImage();
+void cropImage();
+void dimImage();
+void brightenImage();
+void saveImage();
 
-int main() {
-	Image image;
-	bool exitProgram = false;
-	
-	while(!exitProgram) {
+int main(){
+	int choice;
+	do{
 		displayMenu();
-		int choice;
 		printf("Choose from one of the options above: ");
 		scanf("%d", &choice);
-		
-		switch (choice) {
+		switch(choice){
 			case 1:
-				loadImage(&image);
+				loadImage();
 				break;
 			case 2:
-				displayImage(&image);
+				displayImage();
 				break; 
 			case 3:
-				editImage(&image);
+				editImage();
 				break; 
 			case 0:
-				exitProgram = true;
 				printf("Goodbye!\n");
 				break;
 			default:
 				printf("Invalid.\n");
 				break;
 		}
-	}
+	}while(choice != 0);
 	
 	return 0;
 }
@@ -63,62 +57,80 @@ void displayMenu() {
 	printf("0. Exit\n");
 }
 
-void loadImage(Image *image) {
+void loadImage(){
 	char filename[100];
 	printf("What is the name of the image file? ");
-	scanf("%s", filename);
-	
+	scanf("%s", *filename);
+
 	FILE *file = fopen(filename, "r");
+	for(height = 0; height < MAX_SIZE; height++){
+		for(width = 0; width < MAX_SIZE; width++){
+			fscanf(file, "%d", &pixels[height][width]);
+		}
+	}
+
+	
+	
 	if (file == NULL) { 
 		printf("Could not find an image with that filename.");
 		return;
 	}
-	
-	fscanf(file, "%d %d", &image->width, &image->height);
-	for (int i = 0; i < image->height; i++) {
-		for (int j = 0; j < image->width; j++) {
-			fscanf(file, "%d", &image->pixels[i][j]);
-		}
-	}
-	
 	fclose(file);
 	printf("Image loaded successfully!\n");
 }
 
-void displayImage(const Image *image) {
+void displayImage(){
 	printf("\nImage:\n");
-	for (int i = 0; i < image->height; i++) {
-		for (int j = 0; j < image->width; j++) {
-			char ch = image->pixels[i][j] >= 128 ? '#' : '.';
-			printf("%c", ch);
+	for(height = 0; height < MAX_SIZE; height++){
+		for(width = 0; width < MAX_SIZE; width++){
+			if(pixels[height][width] == 0){
+				printf("w");
+				break;
+			}
+			if(pixels[height][width] == 1){
+				printf(".");
+				break;
+			}
+			if(pixels[height][width] == 2){
+				printf("o");
+				break;
+			}
+			if(pixels[height][width] == 3){
+				printf("O");
+				break;
+			}
+			if(pixels[height][width] == 4){
+				printf("0");
+				break;
+			}
+			else{
+				printf("Else");
+				break;
+			}
 		}
-		printf("\n");
-	}
-}
-
-void editImage(Image *image) {
+		//printf("\n");	
+	}	
+}	
+	
+void editImage() {
 	int editChoice;
 	printf("\n**EDITING**\n");
 	printf("1. Crop image\n");
 	printf("2. Dim image\n");
 	printf("3. Brighten image\n");
-	printf("4. Save image\n");
 	printf("0. Back to main menu\n");
 	printf("Enter your choice: ");
 	scanf("%d", &editChoice);
 	
 	switch (editChoice) {
 		case 1:
-			cropImage(image);
+			cropImage();
 			break;
 		case 2:	
-			dimImage(image);
+			dimImage();
 			break;
 		case 3:	
-			brightenImage(image);
-			break;
-		case 4:	
-			saveImage(image);
+			brightenImage();
 			break;
 		case 0:	
 			printf("Returning to main menu...\n");
@@ -129,48 +141,167 @@ void editImage(Image *image) {
 	}
 }
 
-void cropImage(Image *image) {
+void cropImage() {
+}
+	
+void dimImage(char *filename[100]) {
+	for(height = 0; height < MAX_SIZE; height++){
+		for(width = 0; width < MAX_SIZE; width++){
+			if(pixels[height][width] > 0){
+				pixels[height][width]--;
+				if(pixels[height][width] == 0){
+				printf("w");
+				break;
+			}
+			if(pixels[height][width] == 1){
+				printf(".");
+				break;
+			}
+			if(pixels[height][width] == 2){
+				printf("o");
+				break;
+			}
+			if(pixels[height][width] == 3){
+				printf("O");
+				break;
+			}
+			if(pixels[height][width] == 4){
+				printf("0");
+				break;
+			}
+			else{
+				printf("Else");
+				break;
+			}
+		printf("\n");
+			}
+			else{
+				if(pixels[height][width] == 0){
+				printf("w");
+				break;
+			}
+			if(pixels[height][width] == 1){
+				printf(".");
+				break;
+			}
+			if(pixels[height][width] == 2){
+				printf("o");
+				break;
+			}
+			if(pixels[height][width] == 3){
+				printf("O");
+				break;
+			}
+			if(pixels[height][width] == 4){
+				printf("0");
+				break;
+			}
+			else{
+				printf("Else");
+				break;
+			}
+		printf("\n");
+				break;
+			}
+		}
+	}
+	char saveChoice;
+	printf("Would you like to save the file? (y/n) ");
+	scanf("%c", &saveChoice);
+	switch(saveChoice){
+		case 'y':
+			FILE *file = fopen(filename, "w");
+			break;
+		case 'n':
+			break; 	
+
+	}
 }
 
-void dimImage(Image *image) {
-	for(height = 0; height < MAX_SIZE; height++){
-		if(pixels[height] = "o"){
+void brightenImage() {
+for(height = 0; height < MAX_SIZE; height++){
+		for(width = 0; width < MAX_SIZE; width++){
+			if(pixels[height][width] < 4){
+			pixels[height][width]++;
+			if(pixels[height][width] == 0){
+				printf("w");
+				break;
+			}
+			if(pixels[height][width] == 1){
+				printf(".");
+				break;
+			}
+			if(pixels[height][width] == 2){
+				printf("o");
+				break;
+			}
+			if(pixels[height][width] == 3){
+				printf("O");
+				break;
+			}
+			if(pixels[height][width] == 4){
+				printf("0");
+				break;
+			}
+			else{
+				printf("Else");
+				break;
+			}
+		printf("\n");
+			}
+			else{
+				if(pixels[height][width] == 0){
+				printf("w");
+				break;
+			}
+			if(pixels[height][width] == 1){
+				printf(".");
+				break;
+			}
+			if(pixels[height][width] == 2){
+				printf("o");
+				break;
+			}
+			if(pixels[height][width] == 3){
+				printf("O");
+				break;
+			}
+			if(pixels[height][width] == 4){
+				printf("0");
+				break;
+			}
+			else{
+				printf("Else");
+				break;
+			}
+		printf("\n");
+				break;
+			}
 		}
 	}
 }
 
-void brightenImage(Image *image) {
-}
-
-void saveImage(const Image *image) {
-}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
+	/*
+	switch(pixels[height][width]){
+				case 0:
+					printf("w");
+					break;
+				case 1:
+					printf(".");
+					break;
+				case 2:
+					printf("o");
+					break; 
+				case 3:
+					printf("O");
+					break; 
+				case 4:
+					printf("0");
+					break; 	
+			
+				default:
+					printf("Invalid.\n");
+					break;
+	*/
